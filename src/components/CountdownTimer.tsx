@@ -37,7 +37,7 @@ const CountdownTimer = ({ initialDate }: CountdownTimerProps) => {
   return (
     <div className="text-center p-6 rounded-lg bg-white/10 backdrop-blur-sm max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">𝑺𝒕𝒂𝒚 𝒖𝒑𝒅𝒂𝒕𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝑪𝒐𝒏𝒄𝒆𝒓𝒕</h2>
+        <h2 className="text-2xl font-bold">𝑪𝒐𝒏𝒄𝒆𝒓𝒕 𝑪𝒐𝒖𝒏𝒕𝒅𝒐𝒘𝒏</h2>
         <Button 
           variant="outline"
           onClick={() => setIsVisible(false)}
