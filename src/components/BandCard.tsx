@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Instagram, Spotify, Youtube } from "lucide-react";
+import { Instagram, Music, Youtube } from "lucide-react";
 
 interface SocialLinks {
   instagram?: string;
@@ -53,7 +53,7 @@ const BandCard = ({ name, image, bio, members, socialLinks }: BandCardProps) => 
             {socialLinks.spotify && (
               <a href={socialLinks.spotify} target="_blank" rel="noopener noreferrer"
                 className="text-green-600 hover:text-green-700">
-                <Spotify className="w-6 h-6" />
+                <Music className="w-6 h-6" />
               </a>
             )}
             {socialLinks.youtube && (
