@@ -37,7 +37,7 @@ const CountdownTimer = ({ initialDate }: CountdownTimerProps) => {
   return (
     <div className="text-center p-6 rounded-lg bg-white/10 backdrop-blur-sm max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">𝒞𝑜𝓃𝒸𝑒𝓇𝓉 𝒞𝑜𝓊𝓃𝓉𝒹𝑜𝓌𝓃</h2>
+        <h2 className="text-2xl font-bold">𝑺𝒕𝒂𝒚 𝒖𝒑𝒅𝒂𝒕𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝑪𝒐𝒏𝒄𝒆𝒓𝒕</h2>
         <Button 
           variant="outline"
           onClick={() => setIsVisible(false)}
@@ -47,22 +47,22 @@ const CountdownTimer = ({ initialDate }: CountdownTimerProps) => {
         </Button>
       </div>
       
-      <div className="grid grid-cols-4 gap-4">
-        <div className="bg-black/20 p-4 rounded-lg">
-          <div className="text-4xl font-bold">{timeLeft.days}</div>
-          <div className="text-sm text-white/80">Days</div>
+      <div className="grid grid-cols-4 gap-2 md:gap-4">
+        <div className="bg-black/20 p-2 md:p-4 rounded-lg">
+          <div className="text-2xl md:text-4xl font-bold">{timeLeft.days}</div>
+          <div className="text-xs md:text-sm text-white/80">Days</div>
         </div>
-        <div className="bg-black/20 p-4 rounded-lg">
-          <div className="text-4xl font-bold">{timeLeft.hours}</div>
-          <div className="text-sm text-white/80">Hours</div>
+        <div className="bg-black/20 p-2 md:p-4 rounded-lg">
+          <div className="text-2xl md:text-4xl font-bold">{timeLeft.hours}</div>
+          <div className="text-xs md:text-sm text-white/80">Hours</div>
         </div>
-        <div className="bg-black/20 p-4 rounded-lg">
-          <div className="text-4xl font-bold">{timeLeft.minutes}</div>
-          <div className="text-sm text-white/80">Minutes</div>
+        <div className="bg-black/20 p-2 md:p-4 rounded-lg">
+          <div className="text-2xl md:text-4xl font-bold">{timeLeft.minutes}</div>
+          <div className="text-xs md:text-sm text-white/80">Minutes</div>
         </div>
-        <div className="bg-black/20 p-4 rounded-lg">
-          <div className="text-4xl font-bold">{timeLeft.seconds}</div>
-          <div className="text-sm text-white/80">Seconds</div>
+        <div className="bg-black/20 p-2 md:p-4 rounded-lg">
+          <div className="text-2xl md:text-4xl font-bold">{timeLeft.seconds}</div>
+          <div className="text-xs md:text-sm text-white/80">Seconds</div>
         </div>
       </div>
     </div>
