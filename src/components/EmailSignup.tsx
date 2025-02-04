@@ -22,9 +22,9 @@ const EmailSignup = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold text-center">Join the Mailing List</h2>
-      <p className="text-muted-foreground text-center">
-        Stay updated about Leny and Friends concerts and get exclusive content!
+      <h2 className="text-2xl font-bold text-center text-black">𝐉𝐨𝐢𝐧 𝐭𝐡𝐞 𝐌𝐚𝐢𝐥𝐢𝐧𝐠 𝐋𝐢𝐬𝐭</h2>
+      <p className="text-black text-center">
+        𝑺𝒕𝒂𝒚 𝒖𝒑𝒅𝒂𝒕𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝑳𝒆𝒏𝒚 𝒂𝒏𝒅 𝑭𝒓𝒊𝒆𝒏𝒅𝒔 𝒄𝒐𝒏𝒄𝒆𝒓𝒕𝒔 𝒂𝒏𝒅 𝒈𝒆𝒕 𝒆𝒙𝒄𝒍𝒖𝒔𝒊𝒗𝒆 𝒄𝒐𝒏𝒕𝒆𝒏𝒕!
       </p>
       <div className="flex gap-2">
         <Input
