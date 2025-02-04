@@ -9,10 +9,13 @@ const EmailSignup = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email submitted:", email);
+    // Replace this URL with your actual Google Form URL
+    const googleFormUrl = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
+    window.open(googleFormUrl, '_blank');
+    
     toast({
-      title: "Thanks for signing up!",
-      description: "We'll keep you updated about the concert.",
+      title: "Thanks for your interest!",
+      description: "You'll be redirected to our signup form.",
     });
     setEmail("");
   };
@@ -21,7 +24,7 @@ const EmailSignup = () => {
     <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
       <h2 className="text-2xl font-bold text-center">Join the Mailing List</h2>
       <p className="text-muted-foreground text-center">
-        Stay updated about the concert and get exclusive content!
+        Stay updated about Leny and Friends concerts and get exclusive content!
       </p>
       <div className="flex gap-2">
         <Input
