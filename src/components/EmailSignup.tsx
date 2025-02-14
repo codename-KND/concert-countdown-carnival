@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
 const EmailSignup = () => {
@@ -10,7 +9,7 @@ const EmailSignup = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Replace this URL with your actual Google Form URL
-    const googleFormUrl = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
+    const googleFormUrl = "https://forms.gle/F1keWmqQRiYiVE2B6";
     window.open(googleFormUrl, '_blank');
     
     toast({
@@ -26,16 +25,8 @@ const EmailSignup = () => {
       <p className="text-black text-center">
         𝑺𝒕𝒂𝒚 𝒖𝒑𝒅𝒂𝒕𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝑳𝒆𝒏𝒚 𝒂𝒏𝒅 𝑭𝒓𝒊𝒆𝒏𝒅𝒔 𝒄𝒐𝒏𝒄𝒆𝒓𝒕𝒔 𝒂𝒏𝒅 𝒈𝒆𝒕 𝒆𝒙𝒄𝒍𝒖𝒔𝒊𝒗𝒆 𝒄𝒐𝒏𝒕𝒆𝒏𝒕!
       </p>
-      <div className="flex gap-2">
-        <Input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="flex-1"
-        />
-        <Button type="submit">Subscribe</Button>
+      <div className="flex justify-center mt-4">
+          <Button type="submit">Subscribe</Button>
       </div>
     </form>
   );
