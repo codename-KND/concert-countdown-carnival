@@ -8,7 +8,6 @@ const EmailSignup = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Replace this URL with your actual Google Form URL
     const googleFormUrl = "https://forms.gle/F1keWmqQRiYiVE2B6";
     window.open(googleFormUrl, '_blank');
     
@@ -26,7 +25,7 @@ const EmailSignup = () => {
         𝑺𝒕𝒂𝒚 𝒖𝒑𝒅𝒂𝒕𝒆𝒅 𝒂𝒃𝒐𝒖𝒕 𝑳𝒆𝒏𝒚 𝒂𝒏𝒅 𝑭𝒓𝒊𝒆𝒏𝒅𝒔 𝒄𝒐𝒏𝒄𝒆𝒓𝒕𝒔 𝒂𝒏𝒅 𝒈𝒆𝒕 𝒆𝒙𝒄𝒍𝒖𝒔𝒊𝒗𝒆 𝒄𝒐𝒏𝒕𝒆𝒏𝒕!
       </p>
       <div className="flex justify-center mt-4">
-          <Button type="submit">Subscribe</Button>
+          <Button type="submit">Sign Up</Button>
       </div>
     </form>
   );
