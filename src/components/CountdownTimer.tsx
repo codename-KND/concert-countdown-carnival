@@ -37,7 +37,21 @@ const CountdownTimer = ({ initialDate }: CountdownTimerProps) => {
   return (
     <div className="text-center p-6 rounded-lg bg-white/10 backdrop-blur-sm max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">05-07-25 𝑪𝒐𝒏𝒄𝒆𝒓𝒕 𝑪𝒐𝒖𝒏𝒕𝒅𝒐𝒘𝒏</h2>
+        <h2 className="text-2xl font-bold">𝟓𝒕𝒉 -𝑱𝒖𝒍𝒚 -𝟐𝟎𝟐𝟓  𝑪𝒐𝒏𝒄𝒆𝒓𝒕 𝑪𝒐𝒖𝒏𝒕𝒅𝒐𝒘𝒏</h2>
+        <div className="flex space-x-4">
+
+    {/* Google Form Signup Link */}
+    <a 
+      href="https://forms.gle/F1keWmqQRiYiVE2B6"
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="px-4 py-2 text-lg font-semibold text-white bg-indigo-700 bg-opacity-40 border border-green-600 rounded-2xl shadow-md hover:bg-green-600 transition"
+
+
+>
+      Sign Up
+    </a>
+  </div>
         
       </div>
       
