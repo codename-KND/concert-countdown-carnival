@@ -1,11 +1,10 @@
 import CountdownTimer from "@/components/CountdownTimer";
 import BandCard from "@/components/BandCard";
 import EmailSignup from "@/components/EmailSignup";
-import jaydee from "../assets/jaydee.jpg";
+import jb from "../assets/jb.jpg";
 import chat from "../assets/chat.jpg";
 import gambz from "../assets/gambz.jpg";
 import ff from "../assets/ff.jpg";
-import jesse from "../assets/jesse.jpg";
 import leny from "../assets/len.jpg";
 import greg from "../assets/greg.jpg"
 
@@ -38,21 +37,11 @@ const Index = () => {
       }
     },
     {
-      name: "Jayondeebass",
-      image: jaydee,
-      bio: "Bringing the low end as the solid ground you'll get to stand upon.",
+      name: "JB Wangiha",
+      image: jb,
+      bio: "John 'JB' Wangiha is an outstanding musician based in Nairobi, Kenya. He is a multi-instrumentalist, music producer and music arranger, keen on working on jazz music and experimental genres. His main instrument of proficiency is the bass guitar, which he has been playing professionally for more than four years. He has extensively played with musicians from a variety of genres, from afro-fusion to contemporary jazz fusion. Be on the lookout for his breakout for his musically-inspired project dubbed Bass-ically Speaking.",
       socialLinks: {
-        instagram: "https://www.instagram.com/jayondeebass?igsh=YzljYTk1ODg3Zg=="
-      }
-    },
-    {
-      name: "Jesse David",
-      image: jesse,
-      bio: "I'm a songwriter and sustainable musician, creating songs that resonate with the struggles of vulnerable communities and inspire a just, sustainable future. Through music, I strive to amplify voices, spark change, and make a meaningful impact",
-      socialLinks: {
-        instagram: "https://www.instagram.com/jesse_david_j/",
-        youtube: "https://youtu.be/Efiu1efA1ZM",
-        spotify: "https://open.spotify.com/artist/4CA52CCD5wheacp39KBrVx?si=2_pg3X4GT6ydZ-QBYjW_6w"
+        instagram: "https://www.instagram.com/jb_wangiha/"
       }
     },
     {
