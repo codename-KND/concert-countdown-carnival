@@ -1,11 +1,13 @@
 import CountdownTimer from "@/components/CountdownTimer";
 import BandCard from "@/components/BandCard";
 import EmailSignup from "@/components/EmailSignup";
-import jb from "../assets/JB.jpg";
+import jaydee from "../assets/jaydee.jpg";
 import chat from "../assets/chat.jpg";
 import gambz from "../assets/gambz.jpg";
 import ff from "../assets/ff.jpg";
+import jesse from "../assets/jesse.jpg";
 import leny from "../assets/len.jpg";
+import greg from "../assets/greg.jpg"
 
 const Index = () => {
   const bands = [
@@ -23,6 +25,7 @@ const Index = () => {
       bio: "Blending flute and voice to create a sound that’s both soulful and expressive. Music has always been my way of taping into quietude through the warm tones of my voice or the fluid melodies of my flute. Whether I’m performing solo or collaborating with others, I aim to create moments that transport listeners and make them feel something real.",
       socialLinks: {
         instagram: "https://www.instagram.com/qwikiza?igsh=bW5tYzJ2Z3J2Y3Jo",
+        youtube: "https://www.youtube.com/@Qwikiza",
       }
     },
     {
@@ -31,14 +34,25 @@ const Index = () => {
       bio: " We take you on a live music sonic journey of a symphony that creates harmony for hearts, echoing Earth's imperative call. Immerse yourself in a fusion of melodies that awaken the soul, blending rhythm and resonance into an unforgettable experience",
       socialLinks: {
        instagram: "https://www.instagram.com/frequencyfriendsband?igsh=MTdtZTdtaXVwbzRvdA==",
+       youtube: "https://www.youtube.com/@FrequencyFriendsBandKE",
       }
     },
     {
-      name: "JB Wangiha",
-      image: jb,
-      bio: "John 'JB' Wangiha is an outstanding musician based in Nairobi, Kenya. He is a multi-instrumentalist, music producer and music arranger, keen on working on jazz music and experimental genres.His main instrument of proficiency is the bass guitar, which he has been playing professionally for more than four years. He has extensively played with musicians from a variety of genres, from afro-fusion to contemporary jazz fusion.Be on the lookout for his breakout for his musically-inspired project dubbed Bass-ically Speaking.",
+      name: "Jayondeebass",
+      image: jaydee,
+      bio: "Bringing the low end as the solid ground you'll get to stand upon.",
       socialLinks: {
-        instagram: "https://www.instagram.com/jb_wangiha/#"
+        instagram: "https://www.instagram.com/jayondeebass?igsh=YzljYTk1ODg3Zg=="
+      }
+    },
+    {
+      name: "Jesse David",
+      image: jesse,
+      bio: "I'm a songwriter and sustainable musician, creating songs that resonate with the struggles of vulnerable communities and inspire a just, sustainable future. Through music, I strive to amplify voices, spark change, and make a meaningful impact",
+      socialLinks: {
+        instagram: "https://www.instagram.com/jesse_david_j/",
+        youtube: "https://youtu.be/Efiu1efA1ZM",
+        spotify: "https://open.spotify.com/artist/4CA52CCD5wheacp39KBrVx?si=2_pg3X4GT6ydZ-QBYjW_6w"
       }
     },
     {
@@ -48,6 +62,15 @@ const Index = () => {
       socialLinks: {
         instagram: "https://www.instagram.com/lenysmusic?igsh=MWRvY2d5eDlwZXhxdA==",
         spotify: "https://open.spotify.com/album/0KbGfoylJ1U0MfdJUuvPlt?si=vjhPmqJoTNictAYQKLe33g"
+      }
+    },
+    {
+      name: "Gregory Aduwo",
+      image: greg,
+      bio: "Gregory Aduwo is a dynamic trumpet player and passionate music educator known for his versatility across jazz, classical, and contemporary styles. With a rich background performing in jazz bands, orchestras and various ensembles, he brings a deep musicality to every stage. Beyond performing, Greg is dedicated to nurturing the next generation of musicians, tutoring trumpet students and spearheading efforts to improve their musical skills Through his brand @aduwomusic, he shares captivating performances and collaborates with artists across different genres.",
+      socialLinks: {
+        instagram: "https://www.instagram.com/aduwo.music?igsh=Yjd4dWZoN3NrMDJq&utm_source=qr",
+        youtube: "https://youtube.com/@aduwomusic?si=GHlqPGwZ2f1IPlKv",
       }
     }
   ];
