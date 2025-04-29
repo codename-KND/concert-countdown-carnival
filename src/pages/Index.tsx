@@ -1,12 +1,15 @@
+
 import CountdownTimer from "@/components/CountdownTimer";
 import BandCard from "@/components/BandCard";
 import EmailSignup from "@/components/EmailSignup";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import jb from "../assets/jb.jpg";
 import chat from "../assets/chat.jpg";
 import gambz from "../assets/gambz.jpg";
 import ff from "../assets/ff.jpg";
 import leny from "../assets/len.jpg";
-import greg from "../assets/greg.jpg"
+import greg from "../assets/greg.jpg";
 
 const Index = () => {
   const bands = [
@@ -73,6 +76,13 @@ const Index = () => {
             𝙻𝚎𝚗𝚢 𝚊𝚗𝚍 𝙵𝚛𝚒𝚎𝚗𝚍𝚜
           </h1>
           <CountdownTimer initialDate={new Date('2025-07-05')} />
+          <div className="flex justify-center gap-4 mt-8">
+            <Link to="/buy-ticket">
+              <Button className="text-lg px-6 py-5 bg-[#4c6c4c] hover:bg-[#3a533a]">
+                Buy Ticket
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
