@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Ticket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import jazzImage from "../assets/lovable-uploads/e9385710-3f5d-47ad-99a6-1acdcff398a5.png";
+import lenyImage from "../assets/len.jpg";
 
 const BuyTicket = () => {
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const BuyTicket = () => {
                 </CardHeader>
                 <div className="relative h-48 overflow-hidden">
                   <img 
-                    src={jazzImage} 
+                    src={lenyImage} 
                     alt="Jazz Event" 
                     className="w-full h-full object-cover"
                   />
