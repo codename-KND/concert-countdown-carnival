@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { MinusCircle, PlusCircle } from "lucide-react";
 
 const Checkout = () => {
   const [searchParams] = useSearchParams();
   const [ticketName, setTicketName] = useState<string>("");
   const [ticketPrice, setTicketPrice] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(1);
 
   useEffect(() => {
     const ticket = searchParams.get("ticket");
@@ -16,6 +18,18 @@ const Checkout = () => {
     if (ticket) setTicketName(ticket);
     if (price) setTicketPrice(Number(price));
   }, [searchParams]);
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const totalPrice = ticketPrice * quantity;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#cee7e6] to-[#7dc95e] py-20 px-4">
@@ -31,9 +45,41 @@ const Checkout = () => {
                 <span className="font-bold">{ticketName}</span>
               </div>
               <div className="flex justify-between border-b pb-2">
-                <span>Price:</span>
+                <span>Price per Ticket:</span>
                 <span className="font-bold">KSh {ticketPrice}</span>
               </div>
+              
+              <div className="flex justify-between items-center border-b pb-4 pt-2">
+                <span>Quantity:</span>
+                <div className="flex items-center gap-3">
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={decreaseQuantity}
+                    disabled={quantity <= 1}
+                    className="rounded-full h-8 w-8"
+                  >
+                    <MinusCircle className="h-5 w-5" />
+                  </Button>
+                  
+                  <span className="font-bold text-lg w-6 text-center">{quantity}</span>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={increaseQuantity}
+                    className="rounded-full h-8 w-8"
+                  >
+                    <PlusCircle className="h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-2 text-lg font-bold">
+                <span>Total:</span>
+                <span>KSh {totalPrice}</span>
+              </div>
+              
               <div className="pt-4">
                 <p className="text-center text-sm text-gray-600">
                   This is a demo checkout page. In a real application, payment processing would be implemented here.

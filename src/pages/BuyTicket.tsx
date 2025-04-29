@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Ticket } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import jazzImage from "../assets/lovable-uploads/e9385710-3f5d-47ad-99a6-1acdcff398a5.png";
 
 const BuyTicket = () => {
   const navigate = useNavigate();
@@ -11,27 +12,27 @@ const BuyTicket = () => {
     {
       name: "Dreamer",
       price: 1000,
-      description: "Standard admission ticket"
+      description: "Dreamers move first — catch your vibe early. Thank you for believing in the dream"
     },
     {
       name: "Early Bird",
       price: 1200,
-      description: "Get in before everyone else"
+      description: "Early birds don't just catch worms — they catch fire sets"
     },
     {
       name: "Duo-lipa",
       price: 2700,
-      description: "Admits 2 people"
+      description: "Good things come in pairs. It's double the fun with Duo-Lipa."
     },
     {
-      name: "Advance",
+      name: "Regular",
       price: 1500,
-      description: "Regular admission ticket"
+      description: "No rush, just vibes"
     },
     {
       name: "Gate",
       price: 1700,
-      description: "Last-minute admission"
+      description: "I found the doors open"
     }
   ];
 
@@ -48,7 +49,7 @@ const BuyTicket = () => {
             𝙻𝚎𝚗𝚢 𝚊𝚗𝚍 𝙵𝚛𝚒𝚎𝚗𝚍𝚜
           </h1>
           <h2 className="text-2xl md:text-3xl">
-            𝑩𝒖𝒚 𝑻𝒊𝒄𝒌𝒆𝒕𝒔
+            𝑨 𝑱𝒂𝒛𝒛 𝒆𝒙𝒑𝒆𝒓𝒊𝒆𝒏𝒄𝒆 𝒍𝒊𝒌𝒆 𝒏𝒐 𝒐𝒕𝒉𝒆𝒓
           </h2>
         </div>
       </section>
@@ -66,6 +67,13 @@ const BuyTicket = () => {
                     <Ticket className="h-6 w-6" />
                   </CardTitle>
                 </CardHeader>
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={jazzImage} 
+                    alt="Jazz Event" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <CardContent className="pt-6">
                   <p className="text-3xl font-bold mb-2">KSh {ticket.price}</p>
                   <p className="text-gray-600">{ticket.description}</p>
