@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Ticket, Star, Info } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import lenyImage from "../assets/len.jpg";
+import poster from "../assets/Poster.jpg";
 import { toast } from "@/hooks/use-toast";
 
 const BuyTicket = () => {
@@ -137,7 +137,7 @@ const BuyTicket = () => {
       <div 
         className={`relative transition-all duration-500 ${
           isAvailable ? "animate-fade-in opacity-100" : "opacity-70"
-        } ${isDreamer ? "animate-pulse" : ""}`}
+        } ${isDreamer ? "animate-pulse-slow" : ""}`}
       >
         <Card key={ticket.name} className={`overflow-hidden hover:shadow-xl transition-shadow duration-300 ${
           isDreamer ? "border-2 border-yellow-400" : ""
@@ -145,13 +145,13 @@ const BuyTicket = () => {
           <CardHeader className="bg-[#648767]/10 pb-2">
             <CardTitle className="text-2xl flex items-center justify-between">
               {ticket.name}
-              {isDreamer && <Star className="h-5 w-5 text-yellow-400 animate-pulse" />}
+              {isDreamer && <Star className="h-5 w-5 text-yellow-400 animate-pulse-slow" />}
               <Ticket className="h-6 w-6" />
             </CardTitle>
           </CardHeader>
           <div className="relative h-48 overflow-hidden">
             <img 
-              src={lenyImage} 
+              src={poster} 
               alt="Jazz Event" 
               className="w-full h-full object-cover"
             />
