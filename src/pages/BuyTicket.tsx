@@ -133,16 +133,16 @@ const BuyTicket = () => {
     return currentTime >= ticket.startDate && currentTime <= ticket.endDate;
   };
 
-  // Special check for Duo-lipa to make it visible from June 5th but buyable from June 8th
+  // Special check for Duo-lipa to make it visible ONLY from June 5th onwards
   const isDuoLipaVisible = (currentTime: Date) => {
     const duoLipaTicket = tickets.find(t => t.id === "duoLipa");
     if (!duoLipaTicket) return false;
     
-    // Check if it's past the view date and before end date
+    // Only return true if current time is after viewStartDate (June 5th)
     return currentTime >= duoLipaTicket.viewStartDate && currentTime <= duoLipaTicket.endDate;
   };
 
-  // Check if Duo-lipa is buyable
+  // Check if Duo-lipa is buyable (from June 8th)
   const isDuoLipaBuyable = (currentTime: Date) => {
     const duoLipaTicket = tickets.find(t => t.id === "duoLipa");
     if (!duoLipaTicket) return false;
@@ -311,11 +311,18 @@ const BuyTicket = () => {
               renderTicketCard(tickets[0], true, true)
             )}
             
-            {tickets.slice(1).map((ticket, index) => (
-              <div key={ticket.id}>
-                {renderTicketCard(ticket, ticketAvailability[ticket.id as keyof typeof ticketAvailability])}
-              </div>
-            ))}
+            {tickets.slice(1).map((ticket, index) => {
+              // Skip rendering the Duo-lipa ticket if it's not visible yet
+              if (ticket.id === "duoLipa" && !ticketAvailability.duoLipa) {
+                return null;
+              }
+              
+              return (
+                <div key={ticket.id}>
+                  {renderTicketCard(ticket, ticketAvailability[ticket.id as keyof typeof ticketAvailability])}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
