@@ -10,13 +10,18 @@ const Checkout = () => {
   const [ticketName, setTicketName] = useState<string>("");
   const [ticketPrice, setTicketPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
+  const [admits, setAdmits] = useState<number>(1);
 
   useEffect(() => {
     const ticket = searchParams.get("ticket");
     const price = searchParams.get("price");
+    const qty = searchParams.get("quantity");
+    const admitsParam = searchParams.get("admits");
     
     if (ticket) setTicketName(ticket);
     if (price) setTicketPrice(Number(price));
+    if (qty) setQuantity(Number(qty));
+    if (admitsParam) setAdmits(Number(admitsParam));
   }, [searchParams]);
 
   const decreaseQuantity = () => {
@@ -30,12 +35,13 @@ const Checkout = () => {
   };
 
   const totalPrice = ticketPrice * quantity;
+  const totalPeople = quantity * admits;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#cee7e6] to-[#7dc95e] py-20 px-4">
       <div className="container mx-auto max-w-md">
-        <Card>
-          <CardHeader className="bg-[#648767]/10">
+        <Card className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <CardHeader className="bg-gradient-to-r from-[#648767] to-[#7cdf64] text-white">
             <CardTitle className="text-2xl text-center">Checkout</CardTitle>
           </CardHeader>
           <CardContent className="pt-6">
@@ -75,6 +81,13 @@ const Checkout = () => {
                 </div>
               </div>
 
+              {admits > 1 && (
+                <div className="flex justify-between pt-2 pb-4 border-b">
+                  <span>Admits:</span>
+                  <span className="font-bold">{totalPeople} people</span>
+                </div>
+              )}
+
               <div className="flex justify-between pt-2 text-lg font-bold">
                 <span>Total:</span>
                 <span>KSh {totalPrice}</span>
@@ -88,7 +101,7 @@ const Checkout = () => {
             </div>
           </CardContent>
           <CardFooter className="flex-col space-y-2">
-            <Button className="w-full bg-[#648767] hover:bg-[#4c6c4c]">
+            <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
               Complete Purchase
             </Button>
             <Button variant="outline" className="w-full" onClick={() => window.history.back()}>
