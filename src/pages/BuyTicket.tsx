@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Ticket, Star, Info, MinusCircle, PlusCircle } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import len from "../assets/len.jpg";
+import len from "../assets/Poster.jpg";
 import { toast } from "@/hooks/use-toast";
 
 const BuyTicket = () => {

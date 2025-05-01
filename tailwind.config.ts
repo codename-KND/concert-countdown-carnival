@@ -87,8 +87,8 @@ export default {
 					}
 				},
 				'pulseOnce': {
-					'0%, 100%': { opacity: '1', transform: 'scale(1)' },
-					'50%': { opacity: '0.5', transform: 'scale(1.05)' },
+					'20%, 400%': { opacity: '1', transform: 'scale(1)' },
+					'2%': { opacity: '0.85', transform: 'scale(1.05)' },
 				},
 				'fade-in': {
 					'0%': {
@@ -114,7 +114,7 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'pulse-slow': 'pulseOnce 2s ease-in-out infinite',
+				'pulse-slow': 'pulseOnce 2s ease-in-out 4',
 				'fade-in': 'fade-in 0.5s ease-out forwards',
 				'scale-in': 'scale-in 0.3s ease-out forwards',
 			},
