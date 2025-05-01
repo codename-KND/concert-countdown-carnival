@@ -75,7 +75,7 @@ const BuyTicket = () => {
       price: 1700,
       description: "I found the doors open",
       startDate: new Date('2025-05-06T00:00:00Z'),
-      endDate: new Date('2025-07-08T23:59:59Z'), // Updated end date
+      endDate: new Date('2025-07-08T23:59:59Z'),
       color: "from-purple-400 to-indigo-500",
       maxQuantity: 10
     }
@@ -178,18 +178,18 @@ const BuyTicket = () => {
       >
         <Card 
           key={ticket.name} 
-          className={`overflow-hidden hover:shadow-xl transition-shadow duration-300 rounded-xl transform hover:scale-105 h-full ${
+          className={`overflow-hidden hover:shadow-xl transition-shadow duration-300 ${
             isDreamer ? "border-2 border-yellow-400" : ""
           } ${!isAvailable ? "bg-white/80" : ""}`}
         >
-          <CardHeader className={`bg-gradient-to-r ${ticket.color} pb-2 text-white`}>
-            <CardTitle className="text-2xl flex items-center justify-between">
+          <CardHeader className={`bg-gradient-to-r ${ticket.color} text-white`}>
+            <CardTitle className="flex items-center justify-between">
               {ticket.name}
               {isDreamer && <Star className="h-5 w-5 text-yellow-200 animate-pulse-slow" />}
               <Ticket className="h-6 w-6" />
             </CardTitle>
           </CardHeader>
-          <div className="relative h-48 overflow-hidden">
+          <div className="relative h-40 overflow-hidden">
             <img 
               src={len} 
               alt="Jazz Event" 
@@ -202,38 +202,38 @@ const BuyTicket = () => {
               </div>
             )}
           </div>
-          <CardContent className="pt-6">
+          <CardContent className="pt-4">
             {isAvailable && (
-              <p className="text-3xl font-bold mb-2">KSh {ticket.price}</p>
+              <p className="text-2xl font-bold mb-2">KSh {ticket.price}</p>
             )}
-            <p className="text-gray-600">{ticket.description}</p>
+            <p className="text-gray-600 text-sm">{ticket.description}</p>
             {ticket.admitsText && (
               <p className="text-sm font-medium text-purple-600 mt-2">{ticket.admitsText}</p>
             )}
           </CardContent>
-          <CardFooter className="flex flex-col space-y-4">
+          <CardFooter className="flex flex-col space-y-2 pt-0">
             {isAvailable && (
               <div className="flex items-center justify-between w-full">
-                <span className="font-medium">Quantity:</span>
+                <span className="font-medium text-sm">Quantity:</span>
                 <div className="flex items-center gap-3">
                   <Button 
                     variant="outline" 
                     size="icon" 
                     onClick={() => decreaseQuantity(ticket.id)}
                     disabled={ticketQuantities[ticket.id as keyof typeof ticketQuantities] <= 1}
-                    className="rounded-full h-8 w-8 p-0"
+                    className="rounded-full h-7 w-7 p-0"
                   >
                     <MinusCircle className="h-4 w-4" />
                   </Button>
                   
-                  <span className="font-bold text-lg w-6 text-center">{quantity}</span>
+                  <span className="font-bold text-base w-6 text-center">{quantity}</span>
                   
                   <Button 
                     variant="outline" 
                     size="icon" 
                     onClick={() => increaseQuantity(ticket.id)}
                     disabled={ticketQuantities[ticket.id as keyof typeof ticketQuantities] >= ticket.maxQuantity}
-                    className="rounded-full h-8 w-8 p-0"
+                    className="rounded-full h-7 w-7 p-0"
                   >
                     <PlusCircle className="h-4 w-4" />
                   </Button>
@@ -243,7 +243,7 @@ const BuyTicket = () => {
             <Button 
               onClick={() => handleBuyNow(ticket, ticketQuantities[ticket.id as keyof typeof ticketQuantities])}
               disabled={!isAvailable || (ticket.id === "dreamer" && !isBuyButtonEnabled(ticket))}
-              className={`w-full bg-red-500 hover:bg-red-600 text-white`}
+              className="w-full bg-red-500 hover:bg-red-600 text-white"
             >
               Buy Now
             </Button>
@@ -256,22 +256,22 @@ const BuyTicket = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#cee7e6] to-[#7dc95e]">
       {/* Header Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-[#648767] to-[#7cdf64] text-white">
+      <section className="py-16 px-4 bg-gradient-to-r from-[#648767] to-[#7cdf64] text-white">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
             𝙻𝚎𝚗𝚢 𝚊𝚗𝚍 𝙵𝚛𝚒𝚎𝚗𝚍𝚜
           </h1>
-          <h2 className="text-2xl md:text-3xl">
+          <h2 className="text-xl md:text-2xl">
             𝑨 𝑱𝒂𝒛𝒛 𝒆𝒙𝒑𝒆𝒓𝒊𝒆𝒏𝒄𝒆 𝒍𝒊𝒌𝒆 𝒏𝒐 𝒐𝒕𝒉𝒆𝒓
           </h2>
         </div>
       </section>
 
       {/* Tickets Section */}
-      <section className="py-20 px-4">
+      <section className="py-12 px-4">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">𝚃𝚒𝚌𝚔𝚎𝚝𝚜</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <h2 className="text-3xl font-bold text-center mb-8">𝚃𝚒𝚌𝚔𝚎𝚝𝚜</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {showDreamer && (
               <div className="md:col-span-2">
                 {renderTicketCard(tickets[0], true, true)}

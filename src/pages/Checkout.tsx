@@ -25,13 +25,15 @@ const Checkout = () => {
   }, [searchParams]);
 
   const decreaseQuantity = () => {
-    if (quantity > 1) {
+    if (quantity > 1 && ticketName !== "Dreamer") {
       setQuantity(quantity - 1);
     }
   };
 
   const increaseQuantity = () => {
-    setQuantity(quantity + 1);
+    if (ticketName !== "Dreamer") {
+      setQuantity(quantity + 1);
+    }
   };
 
   const totalPrice = ticketPrice * quantity;
@@ -55,31 +57,38 @@ const Checkout = () => {
                 <span className="font-bold">KSh {ticketPrice}</span>
               </div>
               
-              <div className="flex justify-between items-center border-b pb-4 pt-2">
-                <span>Quantity:</span>
-                <div className="flex items-center gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={decreaseQuantity}
-                    disabled={quantity <= 1}
-                    className="rounded-full h-8 w-8"
-                  >
-                    <MinusCircle className="h-5 w-5" />
-                  </Button>
-                  
-                  <span className="font-bold text-lg w-6 text-center">{quantity}</span>
-                  
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={increaseQuantity}
-                    className="rounded-full h-8 w-8"
-                  >
-                    <PlusCircle className="h-5 w-5" />
-                  </Button>
+              {ticketName !== "Dreamer" ? (
+                <div className="flex justify-between items-center border-b pb-4 pt-2">
+                  <span>Quantity:</span>
+                  <div className="flex items-center gap-3">
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      onClick={decreaseQuantity}
+                      disabled={quantity <= 1}
+                      className="rounded-full h-8 w-8"
+                    >
+                      <MinusCircle className="h-5 w-5" />
+                    </Button>
+                    
+                    <span className="font-bold text-lg w-6 text-center">{quantity}</span>
+                    
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      onClick={increaseQuantity}
+                      className="rounded-full h-8 w-8"
+                    >
+                      <PlusCircle className="h-5 w-5" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="flex justify-between border-b pb-4 pt-2">
+                  <span>Quantity:</span>
+                  <span className="font-bold">1</span>
+                </div>
+              )}
 
               {admits > 1 && (
                 <div className="flex justify-between pt-2 pb-4 border-b">
