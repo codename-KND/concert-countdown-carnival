@@ -110,7 +110,7 @@ const Checkout = () => {
             </div>
           </CardContent>
           <CardFooter className="flex-col space-y-2">
-            <Button className="w-full bg-red-500 hover:bg-red-600 text-white">
+            <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
               Complete Purchase
             </Button>
             <Button variant="outline" className="w-full" onClick={() => window.history.back()}>

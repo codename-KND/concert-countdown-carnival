@@ -45,7 +45,7 @@ const BuyTicket = () => {
       description: "Early birds don't just catch worms — they catch fire sets",
       startDate: new Date('2025-05-07T00:00:00Z'),
       endDate: new Date('2025-06-07T23:59:59Z'),
-      color: "from-blue-400 to-indigo-500",
+      color: "from-green-400 to-teal-500",
       maxQuantity: 10
     },
     {
@@ -55,7 +55,7 @@ const BuyTicket = () => {
       description: "Good things come in pairs. It's double the fun with Duo-Lipa.",
       startDate: new Date('2025-06-08T00:00:00Z'),
       endDate: new Date('2025-06-27T23:59:59Z'),
-      color: "from-pink-400 to-purple-500",
+      color: "from-green-400 to-teal-500",
       admitsText: "Admits 2 people",
       maxQuantity: 5
     },
@@ -75,8 +75,8 @@ const BuyTicket = () => {
       price: 1700,
       description: "I found the doors open",
       startDate: new Date('2025-05-06T00:00:00Z'),
-      endDate: new Date('2025-07-08T23:59:59Z'),
-      color: "from-purple-400 to-indigo-500",
+      endDate: new Date('2025-07-07T23:59:59Z'),
+      color: "from-green-400 to-teal-500",
       maxQuantity: 10
     }
   ];
@@ -178,7 +178,7 @@ const BuyTicket = () => {
       >
         <Card 
           key={ticket.name} 
-          className={`overflow-hidden hover:shadow-xl transition-shadow duration-300 ${
+          className={`overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl ${
             isDreamer ? "border-2 border-yellow-400" : ""
           } ${!isAvailable ? "bg-white/80" : ""}`}
         >
@@ -189,7 +189,7 @@ const BuyTicket = () => {
               <Ticket className="h-6 w-6" />
             </CardTitle>
           </CardHeader>
-          <div className="relative h-40 overflow-hidden">
+          <div className="relative h-32 overflow-hidden">
             <img 
               src={len} 
               alt="Jazz Event" 
@@ -243,7 +243,7 @@ const BuyTicket = () => {
             <Button 
               onClick={() => handleBuyNow(ticket, ticketQuantities[ticket.id as keyof typeof ticketQuantities])}
               disabled={!isAvailable || (ticket.id === "dreamer" && !isBuyButtonEnabled(ticket))}
-              className="w-full bg-red-500 hover:bg-red-600 text-white"
+              className="w-full bg-red-600 hover:bg-red-700 text-white"
             >
               Buy Now
             </Button>
@@ -256,7 +256,7 @@ const BuyTicket = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#cee7e6] to-[#7dc95e]">
       {/* Header Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-[#648767] to-[#7cdf64] text-white">
+      <section className="py-12 px-4 bg-gradient-to-r from-[#648767] to-[#7cdf64] text-white">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             𝙻𝚎𝚗𝚢 𝚊𝚗𝚍 𝙵𝚛𝚒𝚎𝚗𝚍𝚜
@@ -268,12 +268,12 @@ const BuyTicket = () => {
       </section>
 
       {/* Tickets Section */}
-      <section className="py-12 px-4">
+      <section className="py-8 px-4">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">𝚃𝚒𝚌𝚔𝚎𝚝𝚜</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h2 className="text-3xl font-bold text-center mb-6">𝚃𝚒𝚌𝚔𝚎𝚝𝚜</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {showDreamer && (
-              <div className="md:col-span-2">
+              <div className="md:col-span-2 lg:col-span-3">
                 {renderTicketCard(tickets[0], true, true)}
               </div>
             )}
