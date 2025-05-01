@@ -53,7 +53,8 @@ const BuyTicket = () => {
       name: "Duo-lipa",
       price: 2700,
       description: "Good things come in pairs. It's double the fun with Duo-Lipa.",
-      startDate: new Date('2025-06-08T00:00:00Z'),
+      viewStartDate: new Date('2025-06-05T00:00:00Z'), // Can be viewed from June 5th
+      startDate: new Date('2025-06-08T00:00:00Z'),     // Buyable from June 8th
       endDate: new Date('2025-06-27T23:59:59Z'),
       color: "from-green-400 to-teal-500",
       admitsText: "Admits 2 people",
@@ -105,7 +106,7 @@ const BuyTicket = () => {
     setTicketAvailability({
       dreamer: false, // Dreamer is only shown via special link
       earlyBird: isTicketAvailable("earlyBird", now),
-      duoLipa: isTicketAvailable("duoLipa", now),
+      duoLipa: isDuoLipaVisible(now),
       regular: isTicketAvailable("regular", now),
       gate: isTicketAvailable("gate", now)
     });
@@ -116,7 +117,7 @@ const BuyTicket = () => {
       setTicketAvailability({
         dreamer: false, // Dreamer is only shown via special link
         earlyBird: isTicketAvailable("earlyBird", currentTime),
-        duoLipa: isTicketAvailable("duoLipa", currentTime),
+        duoLipa: isDuoLipaVisible(currentTime),
         regular: isTicketAvailable("regular", currentTime),
         gate: isTicketAvailable("gate", currentTime)
       });
@@ -132,11 +133,32 @@ const BuyTicket = () => {
     return currentTime >= ticket.startDate && currentTime <= ticket.endDate;
   };
 
+  // Special check for Duo-lipa to make it visible from June 5th but buyable from June 8th
+  const isDuoLipaVisible = (currentTime: Date) => {
+    const duoLipaTicket = tickets.find(t => t.id === "duoLipa");
+    if (!duoLipaTicket) return false;
+    
+    // Check if it's past the view date and before end date
+    return currentTime >= duoLipaTicket.viewStartDate && currentTime <= duoLipaTicket.endDate;
+  };
+
+  // Check if Duo-lipa is buyable
+  const isDuoLipaBuyable = (currentTime: Date) => {
+    const duoLipaTicket = tickets.find(t => t.id === "duoLipa");
+    if (!duoLipaTicket) return false;
+    
+    return currentTime >= duoLipaTicket.startDate && currentTime <= duoLipaTicket.endDate;
+  };
+
   const isBuyButtonEnabled = (ticket: any) => {
     const now = new Date();
-    return ticket.id === "dreamer" 
-      ? now >= ticket.buyStartDate && now <= ticket.endDate
-      : true;
+    if (ticket.id === "dreamer") {
+      return now >= ticket.buyStartDate && now <= ticket.endDate;
+    }
+    if (ticket.id === "duoLipa") {
+      return isDuoLipaBuyable(now);
+    }
+    return true;
   };
 
   const handleBuyNow = (ticket: any, quantity: number) => {
@@ -147,6 +169,15 @@ const BuyTicket = () => {
       });
       return;
     }
+    
+    if (ticket.id === "duoLipa" && !isDuoLipaBuyable(new Date())) {
+      toast({
+        title: "Not Available Yet",
+        description: "Duo-lipa tickets will be available for purchase starting June 8th, 2025.",
+      });
+      return;
+    }
+    
     navigate(`/checkout?ticket=${encodeURIComponent(ticket.name)}&price=${ticket.price}&quantity=${quantity}${ticket.admitsText ? "&admits=2" : ""}`);
   };
   
@@ -169,6 +200,8 @@ const BuyTicket = () => {
 
   const renderTicketCard = (ticket: any, isAvailable: boolean, isDreamer: boolean = false) => {
     const quantity = ticketQuantities[ticket.id as keyof typeof ticketQuantities];
+    const now = new Date();
+    const isBuyable = ticket.id === "duoLipa" ? isDuoLipaBuyable(now) : true;
     
     return (
       <div 
@@ -195,10 +228,12 @@ const BuyTicket = () => {
               alt="Jazz Event" 
               className="w-full h-full object-cover"
             />
-            {!isAvailable && !isDreamer && (
+            {(!isAvailable || (ticket.id === "duoLipa" && !isBuyable)) && (
               <div className="absolute inset-0 bg-white/80 flex flex-col items-center justify-center">
                 <Info className="h-8 w-8 text-gray-500 mb-2" />
-                <p className="font-semibold text-lg text-gray-700">Coming Soon</p>
+                <p className="font-semibold text-lg text-gray-700">
+                  {ticket.id === "duoLipa" && isAvailable ? "Coming June 8th" : "Coming Soon"}
+                </p>
               </div>
             )}
           </div>
@@ -242,7 +277,7 @@ const BuyTicket = () => {
             )}
             <Button 
               onClick={() => handleBuyNow(ticket, ticketQuantities[ticket.id as keyof typeof ticketQuantities])}
-              disabled={!isAvailable || (ticket.id === "dreamer" && !isBuyButtonEnabled(ticket))}
+              disabled={!isAvailable || !isBuyButtonEnabled(ticket)}
               className="w-full bg-red-600 hover:bg-red-700 text-white"
             >
               Buy Now
@@ -273,9 +308,7 @@ const BuyTicket = () => {
           <h2 className="text-3xl font-bold text-center mb-6">𝚃𝚒𝚌𝚔𝚎𝚝𝚜</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {showDreamer && (
-              <div className="md:col-span-2 lg:col-span-3">
-                {renderTicketCard(tickets[0], true, true)}
-              </div>
+              renderTicketCard(tickets[0], true, true)
             )}
             
             {tickets.slice(1).map((ticket, index) => (
