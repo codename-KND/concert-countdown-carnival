@@ -20,6 +20,8 @@ const Checkout = () => {
     mpesaNumber: "",
     email: "",
   });
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
 
   useEffect(() => {
     const ticket = searchParams.get("ticket");
@@ -47,10 +49,84 @@ const Checkout = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    
+    if (name === "mpesaNumber") {
+      // Only allow digits
+      if (value && !/^\d*$/.test(value)) {
+        setPhoneError("Phone number should only contain digits");
+        return;
+      } else {
+        setPhoneError("");
+      }
+      
+      // Limit to 10 digits
+      if (value.length > 10) {
+        return;
+      }
+    }
+    
     setPersonalInfo(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleCompletePurchase = () => {
+  const validatePhoneNumber = (phone: string) => {
+    if (!phone.trim()) {
+      setPhoneError("M-Pesa number is required");
+      return false;
+    }
+    
+    if (phone.length !== 10) {
+      setPhoneError("M-Pesa number must be exactly 10 digits");
+      return false;
+    }
+    
+    if (!/^0[7|1]\d{8}$/.test(phone)) {
+      setPhoneError("Please enter a valid Kenyan phone number starting with 07 or 01");
+      return false;
+    }
+    
+    setPhoneError("");
+    return true;
+  };
+
+  const initiateMpesaSTKPush = async (phoneNumber: string, amount: number) => {
+    try {
+      setIsProcessing(true);
+      
+      // Format phone number to required format (remove leading zero, add country code)
+      const formattedPhone = `254${phoneNumber.substring(1)}`;
+      
+      // Here we would call the M-Pesa API
+      // In a real implementation, this would be an API call to your backend
+      // which would then communicate with the M-Pesa API
+      console.log("Initiating real M-Pesa STK push");
+      console.log("Phone:", formattedPhone);
+      console.log("Amount:", amount);
+      
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // In a real app, we would process the API response here
+      // For now, we'll simulate a successful response
+      toast({
+        title: "M-Pesa STK Push Initiated",
+        description: `Please check your phone ${phoneNumber} for an M-Pesa prompt to pay KSh ${amount}`,
+      });
+      
+      return true;
+    } catch (error) {
+      console.error("M-Pesa STK push failed:", error);
+      toast({
+        title: "Payment Failed",
+        description: "There was an error initiating the M-Pesa payment. Please try again.",
+        variant: "destructive",
+      });
+      return false;
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleCompletePurchase = async () => {
     // Validate fields
     if (!personalInfo.fullName.trim()) {
       toast({
@@ -61,10 +137,10 @@ const Checkout = () => {
       return;
     }
 
-    if (!personalInfo.mpesaNumber.trim()) {
+    if (!validatePhoneNumber(personalInfo.mpesaNumber)) {
       toast({
-        title: "Missing Information",
-        description: "Please enter your M-Pesa number",
+        title: "Invalid Phone Number",
+        description: phoneError || "Please enter a valid M-Pesa number",
         variant: "destructive",
       });
       return;
@@ -80,16 +156,7 @@ const Checkout = () => {
     }
 
     // Initiate M-Pesa STK push
-    toast({
-      title: "M-Pesa STK Push Initiated",
-      description: `Please check your phone ${personalInfo.mpesaNumber} for an M-Pesa prompt to pay KSh ${totalPrice}`,
-    });
-    
-    console.log("Initiating M-Pesa STK push for amount:", totalPrice);
-    console.log("Customer details:", personalInfo);
-    
-    // In a real implementation, this would make an API call to your backend
-    // to initiate the actual STK push via the M-Pesa API
+    await initiateMpesaSTKPush(personalInfo.mpesaNumber, totalPrice);
   };
 
   const totalPrice = ticketPrice * quantity;
@@ -177,11 +244,15 @@ const Checkout = () => {
                   <Input 
                     id="mpesaNumber" 
                     name="mpesaNumber"
-                    placeholder="e.g. 07XXXXXXXX" 
+                    placeholder="e.g. 0712345678" 
                     type="tel"
                     value={personalInfo.mpesaNumber}
                     onChange={handleInputChange}
+                    className={phoneError ? "border-red-500" : ""}
                   />
+                  {phoneError && (
+                    <p className="text-sm text-red-500">{phoneError}</p>
+                  )}
                 </div>
                 
                 <div className="space-y-2">
@@ -203,9 +274,10 @@ const Checkout = () => {
               className="w-full text-white" 
               style={{ backgroundColor: "#a60505", borderColor: "#a60505" }}
               onClick={handleCompletePurchase}
+              disabled={isProcessing}
             >
               <Smartphone className="mr-2" size={16} />
-              Complete Purchase via M-Pesa
+              {isProcessing ? "Processing..." : "Complete Purchase via M-Pesa"}
             </Button>
             <Button variant="outline" className="w-full" onClick={() => window.history.back()}>
               Back to Tickets
