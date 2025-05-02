@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -247,7 +246,7 @@ const BuyTicket = () => {
             )}
           </CardContent>
           <CardFooter className="flex flex-col space-y-2 pt-0">
-            {isAvailable && (
+            {isAvailable && ticket.id !== "dreamer" && (
               <div className="flex items-center justify-between w-full">
                 <span className="font-medium text-sm">Quantity:</span>
                 <div className="flex items-center gap-3">
