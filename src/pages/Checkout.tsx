@@ -3,14 +3,23 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MinusCircle, PlusCircle } from "lucide-react";
+import { MinusCircle, PlusCircle, Smartphone } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 const Checkout = () => {
   const [searchParams] = useSearchParams();
+  const { toast } = useToast();
   const [ticketName, setTicketName] = useState<string>("");
   const [ticketPrice, setTicketPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
   const [admits, setAdmits] = useState<number>(1);
+  const [personalInfo, setPersonalInfo] = useState({
+    fullName: "",
+    mpesaNumber: "",
+    email: "",
+  });
 
   useEffect(() => {
     const ticket = searchParams.get("ticket");
@@ -36,11 +45,58 @@ const Checkout = () => {
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPersonalInfo(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleCompletePurchase = () => {
+    // Validate fields
+    if (!personalInfo.fullName.trim()) {
+      toast({
+        title: "Missing Information",
+        description: "Please enter your full name",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!personalInfo.mpesaNumber.trim()) {
+      toast({
+        title: "Missing Information",
+        description: "Please enter your M-Pesa number",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!personalInfo.email.trim() || !personalInfo.email.includes('@')) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Initiate M-Pesa STK push
+    toast({
+      title: "M-Pesa STK Push Initiated",
+      description: `Please check your phone ${personalInfo.mpesaNumber} for an M-Pesa prompt to pay KSh ${totalPrice}`,
+    });
+    
+    console.log("Initiating M-Pesa STK push for amount:", totalPrice);
+    console.log("Customer details:", personalInfo);
+    
+    // In a real implementation, this would make an API call to your backend
+    // to initiate the actual STK push via the M-Pesa API
+  };
+
   const totalPrice = ticketPrice * quantity;
   const totalPeople = quantity * admits;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#cee7e6] to-[#7dc95e] py-20 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#cee7e6] to-[#7dc95e] py-6 md:py-20 px-4">
       <div className="container mx-auto max-w-md">
         <Card className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
           <CardHeader className="bg-gradient-to-r from-[#648767] to-[#7cdf64] text-white">
@@ -97,21 +153,59 @@ const Checkout = () => {
                 </div>
               )}
 
-              <div className="flex justify-between pt-2 text-lg font-bold">
+              <div className="flex justify-between pt-2 pb-4 border-b text-lg font-bold">
                 <span>Total:</span>
                 <span>KSh {totalPrice}</span>
               </div>
               
-              <div className="pt-4">
-                <p className="text-center text-sm text-gray-600">
-                  This is a demo checkout page. In a real application, payment processing would be implemented here.
-                </p>
+              <div className="space-y-4 pt-4">
+                <h3 className="font-medium text-lg">Personal Information</h3>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="fullName">Full Name</Label>
+                  <Input 
+                    id="fullName" 
+                    name="fullName"
+                    placeholder="Enter your full name" 
+                    value={personalInfo.fullName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="mpesaNumber">M-Pesa Number</Label>
+                  <Input 
+                    id="mpesaNumber" 
+                    name="mpesaNumber"
+                    placeholder="e.g. 07XXXXXXXX" 
+                    type="tel"
+                    value={personalInfo.mpesaNumber}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email Address</Label>
+                  <Input 
+                    id="email" 
+                    name="email"
+                    placeholder="your@email.com" 
+                    type="email"
+                    value={personalInfo.email}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
             </div>
           </CardContent>
           <CardFooter className="flex-col space-y-2">
-            <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-              Complete Purchase
+            <Button 
+              className="w-full text-white" 
+              style={{ backgroundColor: "#a60505", borderColor: "#a60505" }}
+              onClick={handleCompletePurchase}
+            >
+              <Smartphone className="mr-2" size={16} />
+              Complete Purchase via M-Pesa
             </Button>
             <Button variant="outline" className="w-full" onClick={() => window.history.back()}>
               Back to Tickets
